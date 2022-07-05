@@ -1,0 +1,36 @@
+1. How many people? (Add names)
+2. Choose options - veg/nonveg/alcohol/others
+3. Separate bill for each category?
+4. Taxes applicable on each category
+5. Enter items, their categories and their prices
+6. Who ate what - common items vs individual items 
+7. Single person paid or multiple person paid bill
+8. Select person and bill amount paid
+
+
+Future ideas:
+9. Ratios of people who are eating
+
+A - 40%
+B - 40%
+
+
+350/3 = 116
+
+4:4:2
+3:3:3:1
+
+
+35*4 = 140
+35*4 = 140
+35*2 = 70
+
+
+a-1
+b-2
+c-3
+
+e-2000
+
+a=>e - 200
+b=>e - 350
