@@ -1,27 +1,33 @@
 import React, { useState } from 'react';
-import { Box, Button, Paper, TextField, Typography } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 
 import NumberFormat from 'react-number-format';
 import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-const PeopleCount = () => {
+const PeopleCount = (props) => {
 	const [headCount, setHeadCount] = useState(2);
 	const [headCountHelperText, setHeadCountHelperText] = useState(' ');
 	const [headCountError, setHeadCountError] = useState(false);
 
 	const handleHeadCount = (e) => {
 		let val = e.floatValue;
-		if (val == undefined) {
+		if (val === undefined) {
 			setHeadCountError(true);
 			setHeadCountHelperText('Please enter a valid number');
+			// props.setLeftDisable(true);
+			props.setBothDisable(true);
 		} else if (val < 2) {
 			setHeadCountError(true);
 			setHeadCountHelperText('Please enter a number greater than 2');
+			// props.setLeftDisable(true);
+			props.setBothDisable(true);
 		} else {
 			setHeadCountError(false);
 			setHeadCountHelperText(' ');
+			// props.setLeftDisable(false);
+			props.setBothDisable(false);
 		}
 		setHeadCount(val);
 	};

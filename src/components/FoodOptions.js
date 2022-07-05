@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControl, FormControlLabel, FormHelperText, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, FormHelperText, MenuItem, Paper, Select, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 const FoodOptions = () => {
@@ -35,7 +35,7 @@ const FoodOptions = () => {
 			<Typography variant='h5' sx={{ marginBlock: '1rem', textAlign: 'center' }}>
 				Select your food categories!
 			</Typography>
-			<Paper sx={{ display: 'flex', flexDirection: 'column', margin: '1rem', padding: '1rem' }}>
+			<Paper sx={{ display: 'flex', flexDirection: 'column', margin: '1rem', padding: '0.5rem' }}>
 				<FormControlLabel
 					control={
 						<Checkbox
@@ -80,8 +80,10 @@ const FoodOptions = () => {
 					}
 					label='Others'
 				/>
+			</Paper>
+			<Paper sx={{ display: 'flex', flexDirection: 'column', margin: '1rem', padding: '0.5rem' }}>
 				<Box sx={{ minWidth: 300 }}>
-					<Typography sx={{ marginBlock: '2rem 0.5rem' }}>Separate bill?</Typography>
+					<Typography sx={{ marginBlock: '0.5rem' }}>Separate bill?</Typography>
 					<FormControl fullWidth sx={{ marginBlock: '0.5rem' }}>
 						<Select
 							labelId='separate-bill-category'
@@ -95,6 +97,9 @@ const FoodOptions = () => {
 						<FormHelperText>Separate bill for each Category?</FormHelperText>
 					</FormControl>
 				</Box>
+			</Paper>
+			<Paper sx={{ display: 'flex', flexDirection: 'column', margin: '1rem', padding: '0.5rem' }}>
+				
 			</Paper>
 		</>
 	);
