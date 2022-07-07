@@ -1,63 +1,59 @@
 import { Box, Fab, Paper } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import FoodOptions from './FoodOptions';
 import PeopleCount from './PeopleCount';
+import ItemDetails from './ItemDetails';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const Content = () => {
-	const [currentPage, setCurrentPage] = useState(1);
-	const [leftDisable, setLeftDisable] = useState(false);
+	const [currentPage, setCurrentPage] = useState(0);
+	const [leftDisable, setLeftDisable] = useState(true);
 	const [rightDisable, setRightDisable] = useState(false);
 	const [bothDisable, setBothDisable] = useState(false);
 
 	const previousPageHandler = () => {
-		if (currentPage === 1) {
-			setLeftDisable(false);
-		} else {
-			setCurrentPage((prevPage) => prevPage - 1);
-			setLeftDisable(false);
-		}
+		setCurrentPage((prevPage) => prevPage - 1);
 	};
 
 	const nextPageHandler = () => {
-		if (currentPage === 0) {
-			setRightDisable(false);
-		} else {
-			setCurrentPage((prevPage) => prevPage + 1);
-			setRightDisable(false);
-		}
+		setCurrentPage((prevPage) => prevPage + 1);
 	};
+
+	useEffect(() => {
+		if (currentPage === 0) {
+			setLeftDisable(true);
+		} else if (currentPage === 2) {
+			setRightDisable(true);
+		} else {
+			setRightDisable(false);
+			setLeftDisable(false);
+		}
+	}, [currentPage]);
 
 	return (
 		<Paper
 			sx={{
 				width: '90%',
 				display: 'flex',
-				justifyContent: 'center',
+				justifyContent: 'stretch',
 				flexDirection: 'column',
 				alignItems: 'center',
 				marginInline: 'auto',
-				marginBlock: '2rem',
+				marginBlock: '1rem',
 				flexGrow: 1,
-				height: 'calc(100vh - 14rem)',
 			}}
 		>
-			{/* <Box sx={{ display: currentPage === 0 ? 'initial' : 'none', overflow: 'auto' }}>
-				<PeopleCount
-					setLeftDisable={setLeftDisable}
-					setRightDisable={setRightDisable}
-					setBothDisable={setBothDisable}
-				/>
-			</Box> */}
+			<Box sx={{ display: currentPage === 0 ? 'initial' : 'none', overflow: 'auto' }}>
+				<PeopleCount setBothDisable={setBothDisable} />
+			</Box>
 			<Box sx={{ display: currentPage === 1 ? 'initial' : 'none', overflow: 'auto' }}>
-				<FoodOptions
-					setLeftDisable={setLeftDisable}
-					setRightDisable={setRightDisable}
-					setBothDisable={setBothDisable}
-				/>
+				<FoodOptions setBothDisable={setBothDisable} />
+			</Box>
+			<Box sx={{ display: currentPage === 2 ? 'initial' : 'none', overflow: 'auto' }}>
+				<ItemDetails setBothDisable={setBothDisable} />
 			</Box>
 			<Box
 				sx={{

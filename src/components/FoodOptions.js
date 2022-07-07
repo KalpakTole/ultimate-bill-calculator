@@ -69,6 +69,9 @@ const FoodOptions = () => {
 				Select your food categories!
 			</Typography>
 			<Paper sx={{ display: 'flex', flexDirection: 'column', margin: '1rem', padding: '0.5rem' }}>
+				<Box sx={{ display: 'flex', justifyContent: 'flex-end', marginInline: '4rem' }}>
+					<Typography variant='body2'>Taxes</Typography>
+				</Box>
 				<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
 					<FormControlLabel
 						control={
@@ -87,6 +90,7 @@ const FoodOptions = () => {
 						displayType={'input'}
 						decimalScale={2}
 						suffix={' %'}
+						allowNegative={false}
 						onValueChange={(values) => {
 							const { floatValue } = values;
 							handleFoodTaxes('veg', floatValue);
@@ -114,6 +118,7 @@ const FoodOptions = () => {
 						displayType={'input'}
 						decimalScale={2}
 						suffix={' %'}
+						allowNegative={false}
 						onValueChange={(values) => {
 							const { floatValue } = values;
 							handleFoodTaxes('nonVeg', floatValue);
@@ -141,6 +146,7 @@ const FoodOptions = () => {
 						displayType={'input'}
 						decimalScale={2}
 						suffix={' %'}
+						allowNegative={false}
 						onValueChange={(values) => {
 							const { floatValue } = values;
 							handleFoodTaxes('drinks', floatValue);
@@ -168,6 +174,7 @@ const FoodOptions = () => {
 						displayType={'input'}
 						decimalScale={2}
 						suffix={' %'}
+						allowNegative={false}
 						onValueChange={(values) => {
 							const { floatValue } = values;
 							handleFoodTaxes('others', floatValue);
