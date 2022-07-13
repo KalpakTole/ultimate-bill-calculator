@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, FormHelperText, MenuItem, Select, Typography } from '@mui/material';
+import {
+	Box,
+	Button,
+	FormControl,
+	FormHelperText,
+	List,
+	ListItem,
+	ListItemText,
+	MenuItem,
+	Paper,
+	Select,
+	Typography,
+} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -31,8 +43,8 @@ const ItemDetails = () => {
 
 	return (
 		<>
-			<Box>
-				<Button variant='outlined' onClick={handleClickOpen}>
+			<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<Button variant='contained' onClick={handleClickOpen} color='secondary'>
 					Add Item
 				</Button>
 				<Dialog open={dialogOpen} onClose={handleClose} maxWidth='xs'>
@@ -107,15 +119,37 @@ const ItemDetails = () => {
 					</DialogActions>
 				</Dialog>
 			</Box>
-			<Box>
-				{items.map((item) => (
-					<Box key={item.name}>
-						<Typography>{item.name}</Typography>
-						<Typography>{item.value}</Typography>
-						<Typography>{item.category}</Typography>
-					</Box>
-				))}
-			</Box>
+			<Paper
+			elevation={4}
+				sx={{
+					width: '25rem',
+					marginBlock: '2rem',
+					paddingBlock: '0.25rem',
+				}}
+			>
+				<List>
+					{items.map((item) => (
+						<ListItem
+							key={item.name}
+							sx={{
+								borderWidth: '2px',
+								borderStyle: 'solid',
+								borderColor: 'primary.main',
+								borderRadius: '0.25rem',
+								marginBlock: '1rem',
+							}}
+						>
+							{item.category === 'veg' && <ListItemText primary={item.name} secondary='Vegetarian' />}
+							{item.category === 'nonVeg' && (
+								<ListItemText primary={item.name} secondary='Non-Vegetarian' />
+							)}
+							{item.category === 'drinks' && <ListItemText primary={item.name} secondary='Drinks' />}
+							{item.category === 'others' && <ListItemText primary={item.name} secondary='Others' />}
+							<Typography variant='subtitle2'>₹ {item.value}</Typography>
+						</ListItem>
+					))}
+				</List>
+			</Paper>
 		</>
 	);
 };
