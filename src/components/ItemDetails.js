@@ -120,10 +120,10 @@ const ItemDetails = () => {
 				</Dialog>
 			</Box>
 			<Paper
-			elevation={4}
+			elevation={0}
 				sx={{
-					width: '25rem',
-					marginBlock: '2rem',
+					width: '30rem',
+					marginBlock: '1rem',
 					paddingBlock: '0.25rem',
 				}}
 			>

@@ -10,6 +10,8 @@
 
 Future ideas:
 9. Ratios of people who are eating
+10. Suggestion of ratios 
+
 
 A - 40%
 B - 40%

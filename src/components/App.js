@@ -1,11 +1,15 @@
 import Home from './Home';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { indigo, lime } from '@mui/material/colors';
+import { indigo, red } from '@mui/material/colors';
 
 const theme = createTheme({
 	palette: {
-		primary: indigo,
-		secondary: lime,
+		primary: {
+			main: '#9C0F48',
+		},
+		secondary: {
+			main: '#D4D925',
+		},
 	},
 });
 

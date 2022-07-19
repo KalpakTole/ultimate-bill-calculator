@@ -35,20 +35,23 @@ const Content = () => {
 
 	return (
 		<Paper
+			elevation={4}
 			sx={{
 				width: '90%',
 				display: 'flex',
-				justifyContent: 'stretch',
+				justifyContent: 'center',
 				flexDirection: 'column',
 				alignItems: 'center',
 				marginInline: 'auto',
 				marginBlock: '1rem',
+				padding: '1rem',
 				flexGrow: 1,
 			}}
 		>
-			<Box sx={{ display: currentPage === 0 ? 'initial' : 'none', overflow: 'auto' }}>
+			{/* <Box sx={{ display: currentPage === 0 ? 'initial' : 'none', overflow: 'auto' }}>
 				<PeopleCount setBothDisable={setBothDisable} />
-			</Box>
+			</Box> */}
+			{currentPage === 0 && <PeopleCount setBothDisable={setBothDisable} />}
 			<Box sx={{ display: currentPage === 1 ? 'initial' : 'none', overflow: 'auto' }}>
 				<FoodOptions setBothDisable={setBothDisable} />
 			</Box>
@@ -61,7 +64,6 @@ const Content = () => {
 					display: 'flex',
 					justifyContent: 'space-around',
 					width: '100%',
-					marginBlockEnd: '1rem',
 				}}
 			>
 				<Fab

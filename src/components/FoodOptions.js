@@ -65,7 +65,7 @@ const FoodOptions = () => {
 
 	return (
 		<>
-			<Typography variant='h5' sx={{ marginBlock: '1rem', textAlign: 'center' }}>
+			<Typography variant='h5' sx={{ marginBlockEnd: '1rem', textAlign: 'center' }}>
 				Select your food categories!
 			</Typography>
 			<Paper sx={{ display: 'flex', flexDirection: 'column', margin: '1rem', padding: '0.5rem' }}>

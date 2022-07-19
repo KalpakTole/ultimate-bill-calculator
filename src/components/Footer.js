@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-		<AppBar sx={{position: 'fixed', bottom: 0, top: 'initial', left: 0, right: 0}}>
+		<AppBar sx={{position: 'sticky', bottom: 0, top: 'initial', left: 0, right: 0}}>
 			<Toolbar>
 				<Typography
 					variant='body'
