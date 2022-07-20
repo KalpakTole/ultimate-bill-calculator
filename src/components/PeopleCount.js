@@ -90,7 +90,7 @@ const PeopleCount = ({ setBothDisable }) => {
 				</IconButton>
 			</Box>
 			<Box sx={{ maxWidth: '20rem' }}>
-				<Typography sx={{ marginBlock: '1rem', fontWeight: '400' }} variant='h6' component='div'>
+				<Typography variant='h5' sx={{ marginBlock: '1rem', fontSize: '20px' }}>
 					Enter their names:
 				</Typography>
 				<Paper sx={{ width: '20rem', maxHeight: '18rem', overflow: 'auto' }}>

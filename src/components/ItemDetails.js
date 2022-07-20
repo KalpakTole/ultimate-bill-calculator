@@ -20,9 +20,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import NumberFormat from 'react-number-format';
 
+const INITIAL_CURRENT_ITEM = { name: '', category: 'veg', value: 0 };
+
 const ItemDetails = () => {
 	const [dialogOpen, setDialogOpen] = useState(false);
-	const [currentItem, setCurrentItem] = useState({ name: '', category: 'veg', value: 0 });
+	const [currentItem, setCurrentItem] = useState(INITIAL_CURRENT_ITEM);
 	const [items, setItems] = useState([]);
 
 	const handleClickOpen = () => {
@@ -35,9 +37,11 @@ const ItemDetails = () => {
 
 	const handleAddItem = () => {
 		console.log(currentItem);
+		if (currentItem.name === '' || currentItem.value === 0) return;
 		setItems((allCurrentItems) => {
 			return [...allCurrentItems, currentItem];
 		});
+		setCurrentItem(INITIAL_CURRENT_ITEM);
 		setDialogOpen(false);
 	};
 
@@ -120,13 +124,16 @@ const ItemDetails = () => {
 				</Dialog>
 			</Box>
 			<Paper
-			elevation={0}
+				elevation={0}
 				sx={{
 					width: '30rem',
 					marginBlock: '1rem',
 					paddingBlock: '0.25rem',
 				}}
 			>
+				<Typography variant='h5' sx={{ fontSize: '20px' }}>
+					Items added:
+				</Typography>
 				<List>
 					{items.map((item) => (
 						<ListItem
@@ -136,7 +143,8 @@ const ItemDetails = () => {
 								borderStyle: 'solid',
 								borderColor: 'primary.main',
 								borderRadius: '0.25rem',
-								marginBlock: '1rem',
+								marginBlock: '0.5rem',
+								padding: '0.15rem 0.75rem',
 							}}
 						>
 							{item.category === 'veg' && <ListItemText primary={item.name} secondary='Vegetarian' />}
