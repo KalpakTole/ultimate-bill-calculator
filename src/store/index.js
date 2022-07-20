@@ -3,25 +3,38 @@ import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 const headCountSlice = createSlice({
 	name: 'peopleCount',
-	initialState: { headCount: 2, gobblerNames: [] },
+	initialState: {
+		headCount: 2,
+		gobblerNames: [
+			{ id: 1, name: '' },
+			{ id: 2, name: '' },
+		],
+	},
 	reducers: {
 		increaseHeadCount(state) {
 			state.headCount++;
+			if (state.headCount > 0) {
+				state.gobblerNames = [...state.gobblerNames, { id: state.gobblerNames.length + 1, name: '' }];
+			}
 		},
 		decreaseHeadCount(state) {
 			state.headCount--;
+			if (state.headCount >= 0) {
+				state.gobblerNames = state.gobblerNames.slice(0, -1);
+			}
 		},
 		handleHeadCountInputChange(state, action) {
 			state.headCount = action.payload;
 		},
-		addGobbler(state, action) {
-			state.gobblerNames = [...state.gobblerNames, { id: uuidv4(), name: action.payload }];
-		},
-		removeGobbler(state, action) {
-			state.gobblerNames = state.gobblerNames.filter((gobbler) => {
-				return gobbler.id !== action.payload;
-			});
-		},
+		handleGobblerName(state, action) {
+			const { gobblerId, newName } = action.payload;
+			for (let i = 0; i < state.gobblerNames.length; i++) {
+				if (state.gobblerNames[i].id === gobblerId) {
+					state.gobblerNames[i].name = newName;
+					break;
+				}
+			}
+		}
 	},
 });
 

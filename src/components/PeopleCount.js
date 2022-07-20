@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, List, ListItem, ListItemText, ListSubheader, Paper, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, List, ListItem, Paper, TextField, Typography } from '@mui/material';
 
 import NumberFormat from 'react-number-format';
 import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import ClearIcon from '@mui/icons-material/Clear';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { headCountActions } from '../store/index';
@@ -14,12 +13,8 @@ const PeopleCount = ({ setBothDisable }) => {
 	const dispatch = useDispatch();
 	const headCount = useSelector((state) => state.headCount);
 	const gobblerNames = useSelector((state) => state.gobblerNames);
-
-	// const [headCount, setHeadCount] = useState(2);
 	const [headCountHelperText, setHeadCountHelperText] = useState(' ');
 	const [headCountError, setHeadCountError] = useState(false);
-	const currentGobbler = useRef(null);
-	const [filledArray, setFilledArray] = useState([]);
 
 	const handleHeadCount = (e) => {
 		let val = e.floatValue;
@@ -41,66 +36,34 @@ const PeopleCount = ({ setBothDisable }) => {
 
 	const increaseHeadCount = () => {
 		dispatch(headCountActions.increaseHeadCount());
-		let tempArray = [...filledArray];
-		if (headCount >= 0) {
-			tempArray.push({ id: tempArray.length + 1, name: '' });
-			setFilledArray(tempArray);
-		}
 	};
 
 	const decreaseHeadCount = () => {
 		dispatch(headCountActions.decreaseHeadCount());
-		let tempArray = [...filledArray];
-		if (headCount >= 1) {
-			tempArray = tempArray.slice(0, -1);
-			setFilledArray(tempArray);
-		}
-	};
-
-	const handleGobblerAddition = () => {
-		dispatch(headCountActions.addGobbler(currentGobbler.current.value));
-	};
-
-	const handleGobblerRemoval = (index) => {
-		dispatch(headCountActions.removeGobbler(index));
 	};
 
 	const changeGobblerName = (gobblerId, newName) => {
-		let currentArray = [...filledArray];
-		for (let i = 0; i < currentArray.length; i++) {
-			if (currentArray[i].id === gobblerId) {
-				currentArray[i].name = newName;
-				break;
-			}
-		}
-		setFilledArray(currentArray);
+		dispatch(headCountActions.handleGobblerName({ gobblerId, newName }));
 	};
 
 	useEffect(() => {
-		let tempArray = new Array(headCount);
-		for (let i = 0; i < headCount; i++) {
-			tempArray[i] = { id: i + 1, name: '' };
-		}
-		setFilledArray(tempArray);
-	}, []);
-
-	useEffect(() => {
 		let flag = true;
-		filledArray.forEach((ele) => {
+		gobblerNames.forEach((ele) => {
 			if (ele.name === '') {
 				flag = false;
 				setBothDisable(true);
 				return;
 			}
 		});
-		if (filledArray.length === 0) {
+		if (gobblerNames.length === 0) {
 			setBothDisable(true);
 			return;
 		}
 		if (flag) {
 			setBothDisable(false);
 		}
-	}, [filledArray, setBothDisable]);
+		console.log(gobblerNames);
+	}, [gobblerNames, setBothDisable]);
 
 	return (
 		<>
@@ -126,40 +89,15 @@ const PeopleCount = ({ setBothDisable }) => {
 					<AddIcon />
 				</IconButton>
 			</Box>
-			{/* <Typography variant='h6' sx={{ marginBlock: '0.5rem', fontWeight: '400' }}>
-				Enter their names
-			</Typography> */}
-			{/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-				<TextField
-					id='gobbler-name-input'
-					label='Gobblers'
-					variant='outlined'
-					sx={{ width: '75%', marginBlock: '0.5rem' }}
-					inputRef={currentGobbler}
-					size='small'
-				/>
-				<Button variant='contained' onClick={handleGobblerAddition} sx={{ width: '25%' }}>
-					Add
-				</Button>
-			</Box> */}
 			<Box sx={{ maxWidth: '20rem' }}>
 				<Typography sx={{ marginBlock: '1rem', fontWeight: '400' }} variant='h6' component='div'>
 					Enter their names:
 				</Typography>
 				<Paper sx={{ width: '20rem', maxHeight: '18rem', overflow: 'auto' }}>
 					<List>
-						{filledArray.map((gobbler) => (
+						{gobblerNames.map((gobbler) => (
 							<ListItem
 								key={gobbler.id}
-								// secondaryAction={
-								// 	<IconButton
-								// 		edge='end'
-								// 		aria-label='remove-gobbler'
-								// 		onClick={() => handleGobblerRemoval(gobbler.id)}
-								// 	>
-								// 		<ClearIcon />
-								// 	</IconButton>
-								// }
 								sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
 							>
 								<Typography
